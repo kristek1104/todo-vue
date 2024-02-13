@@ -5,7 +5,8 @@
             <div class="form">
                 <input type="text"
                        v-model="valueInput"
-                       @keydown.enter="addTask">
+                       @keydown.enter="addTask"
+                       maxlength="25">
                 <button class="btn" @click="addTask">add</button>
             </div>
         </div>
@@ -30,3 +31,8 @@
     }
 
 </script>
+<style>
+    button {
+        margin-left: 2px;
+    }
+</style>
