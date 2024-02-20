@@ -4,9 +4,9 @@
             <div class="logo">ToDo List</div>
             <div class="form">
                 <input type="text"
+                       maxlength="25"
                        v-model="valueInput"
-                       @keydown.enter="addTask"
-                       maxlength="25">
+                       @keydown.enter="addTask">
                 <button class="btn" @click="addTask">add</button>
             </div>
         </div>
@@ -31,8 +31,12 @@
     }
 
 </script>
+
 <style>
-    button {
+    .btn {
         margin-left: 2px;
+    }
+    .logo {
+         font-size: 20px
     }
 </style>
