@@ -1,0 +1,51 @@
+.body {
+    min-width: 320px;
+    min-height: 100vh;
+}
+
+.btn {
+    font-size: 12px;
+    height: 32px;
+    border-radius: 10px;
+    border: 0px;
+}
+
+.btn-remove {
+    height: 35px;
+    width: 35px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+span.span-text {
+    text-align: center;
+}
+
+.task-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+    margin-bottom: 10px;
+    background-color: grey;
+    padding-left: 5px;
+    border-radius: 11px;
+    width: 400px;
+}
+
+
+.task-list {
+    padding-left: 0;
+}
+
+input[type="checkbox"] {
+    justify-content: end;
+}
+.form input {
+    width: 360px;
+    height: 25px;
+}
+.tasksToDo {
+    padding-top: 30px;
+    margin-bottom: 0px;
+}
