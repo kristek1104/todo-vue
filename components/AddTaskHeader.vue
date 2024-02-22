@@ -3,9 +3,9 @@
         <div class="container">
             <div class="logo">ToDo List</div>
             <div class="form">
-                <input type="text"
+                <input v-model="valueInput"
+                       type="text"
                        maxlength="25"
-                       v-model="valueInput"
                        @keydown.enter="addTask">
                 <button class="btn" @click="addTask">add</button>
             </div>

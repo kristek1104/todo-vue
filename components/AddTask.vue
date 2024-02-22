@@ -1,34 +1,32 @@
-<template>
-    <div>
-        <ul class="task-list">
-            <li v-for="task in needDoList"
-                :key="task.idTask">
-                <span v-if="task !== editingTask" @click="editTask(task)">{{ task.name }}</span>
-                <input v-if="task === editingTask" v-model="task.name" type="text" @keydown.enter="endEditing(task)">
-                <button v-if="task === editingTask" class="btnOK" @click="endEditing(task)">OK</button>
-                <div>
-                    <input v-if="task.checked === false" type="checkbox" @click="checkedTask(task)" />
-                    <input v-else="task.checked === true" checked type="checkbox" @click="checkedTask(task)" />
-                    <button class="btn-remove"
-                            @click="deleteTask(task)">
-                        <span class="span-text">
-                            x
-                        </span>
-                    </button>
-                </div>
-            </li>
-        </ul>
-    </div>
-</template>
+<temlate>
+    <li v-for="task in needDoList"
+        :key="task.idTask">
+        <span v-if="task !== editingTask" @click="editTask(task)">{{ task.name }}</span>
+        <input type="text" v-if="task === editingTask" v-model="task.name" @keydown.enter="endEditing(task)">
+        <div>
+            <input type="checkbox" v-if="task.checked === false" @click="checkedTask(task)" />
+            <input type="checkbox" v-else="task.checked === true" checked @click="checkedTask(task)" />
+            <button class="btn-remove"
+                    @click="deleteTask(task)">
+                <span class="span-text">
+                    x
+                </span>
+            </button>
+        </div>
+    </li>
+</temlate>
 <script>
     import axios from '../../node_modules/axios/index';
+    import AddTask from '../components/AddTask.vue';
     export default {
-
         data() {
             return {
                 valueInput: '',
                 editingTask: '',
             };
+        },
+        components: {
+            AddTask,
         },
         props: {
             needDoList: {
@@ -46,7 +44,7 @@
         methods: {
             deleteTask(taskToRemove) {
                 this.$emit('delete-task', taskToRemove);
-                
+
             },
             editTask(task) {
                 this.editingTask = task;
@@ -67,11 +65,3 @@
         },
     }
 </script>
-<style>
-    .btnOK {
-        font-size: 12px;
-        font-weight: 100;
-        color: rgba(255, 255, 255, 0.87);
-        background-color: #3B3B3B;
-    }
-</style>
