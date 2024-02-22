@@ -5,24 +5,7 @@
             <h2>
                 <span>Tasks To Do:</span>
             </h2>
-            <ul v-for="task in needDoList"
-                :key="task.idTask"
-                class="task-list">
-                <li>
-                    <span v-if="task !== editingTask" @click="editTask(task)">{{ task.name }}</span>
-                    <input type="text" v-if="task === editingTask" v-model="task.name" @keydown.enter="endEditing(task)">
-                    <div>
-                        <input type="checkbox" v-if="task.checked === false" @click="checkedTask(task)" />
-                        <input type="checkbox" v-else="task.checked === true" checked @click="checkedTask(task)" />
-                        <button class="btn-remove"
-                                @click="handleDelete(task)">
-                            <span class="span-text">
-                                x
-                            </span>
-                        </button>
-                    </div>
-                </li>
-            </ul>
+            <add-list :need-do-list="needDoList" @delete-task="handleDelete" @update-data="updateData" />
         </div>
 
     </div>
@@ -31,12 +14,14 @@
 <script>
     import axios from '../node_modules/axios/index';
     import AddTaskHeader from './components/AddTaskHeader.vue';
+    import AddList from './components/AddList.vue';
 
     export default {
         name: "App",
 
         components: {
             AddTaskHeader,
+            AddList,
         },
         data() {
             return {
@@ -66,6 +51,9 @@
                     .catch(error => console.error('Error:', error));
                 this.needDoList.push(currentTask);
                 this.valueInput = '';
+            },
+            updateData(data) {
+                this.needDoList = data;
             },
             handleDelete(taskToRemove) {
                 axios.delete(`https://65c4b2f0dae2304e92e324ec.mockapi.io/todo/tasks/${taskToRemove.id}`)
