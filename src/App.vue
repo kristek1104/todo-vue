@@ -38,6 +38,7 @@
                 .catch(error => console.error('Error:', error));
         },
         methods: {
+            
             addTask(task) {
                 const currentTask = {
                     name: task,

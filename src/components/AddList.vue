@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div @click="handleClick">
         <ul class="task-list">
             <li v-for="task in needDoList"
                 :key="task.idTask">
                 <span v-if="task !== editingTask" @click="editTask(task)">{{ task.name }}</span>
-                <input v-if="task === editingTask" v-model="task.name" type="text" @keydown.enter="endEditing(task)">
-                <button v-if="task === editingTask" class="btnOK" @click="endEditing(task)">OK</button>
+                <input v-if="task === editingTask" v-model="task.name" type="text" @keydown.enter="endEditing(task)" v-click-away="onClickAway">
+                <!--<button v-if="task === editingTask" class="btnOK" @click="endEditing(task)">OK</button>-->
                 <div>
                     <input v-if="task.checked === false" type="checkbox" @click="checkedTask(task)" />
                     <input v-else="task.checked === true" checked type="checkbox" @click="checkedTask(task)" />
@@ -44,9 +44,14 @@
                 .catch(error => console.error('Error:', error));
         },
         methods: {
+            onClickAway() {
+                    axios.put(`https://65c4b2f0dae2304e92e324ec.mockapi.io/todo/tasks/${this.editingTask.id}`, this.editingTask)
+                        .catch(error => console.error('Error:', error));
+                    this.editingTask = null;
+            },
             deleteTask(taskToRemove) {
                 this.$emit('delete-task', taskToRemove);
-                
+
             },
             editTask(task) {
                 this.editingTask = task;
@@ -67,11 +72,11 @@
         },
     }
 </script>
-<style>
+<!--<style>
     .btnOK {
         font-size: 12px;
         font-weight: 100;
         color: rgba(255, 255, 255, 0.87);
         background-color: #3B3B3B;
     }
-</style>
+</style>-->
