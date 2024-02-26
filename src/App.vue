@@ -35,7 +35,7 @@
                 .then(res => {
                     this.needDoList = res.data;
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => console.error('Error in getting tasks:', error));
         },
         methods: {
             
@@ -49,7 +49,7 @@
                     .then(res => {
                         currentTask.id = res.data.id;
                     })
-                    .catch(error => console.error('Error:', error));
+                    .catch(error => console.error('Error in adding task:', error));
                 this.needDoList.push(currentTask);
                 this.valueInput = '';
             },
@@ -58,7 +58,7 @@
             },
             handleDelete(taskToRemove) {
                 axios.delete(`https://65c4b2f0dae2304e92e324ec.mockapi.io/todo/tasks/${taskToRemove.id}`)
-                    .catch(error => console.error('Error:', error));
+                    .catch(error => console.error('Error in deleting task:', error));
                 const index = this.needDoList.indexOf(taskToRemove);
                 this.needDoList.splice(index, 1);
             },
@@ -67,7 +67,7 @@
             },
             endEditing(task) {
                 axios.put(`https://65c4b2f0dae2304e92e324ec.mockapi.io/todo/tasks/${task.id}`, task)
-                    .catch(error => console.error('Error:', error));
+                    .catch(error => console.error('Error in editing task:', error));
                 this.editingTask = null;
             },
             checkedTask(task) {
@@ -75,7 +75,7 @@
                     checked: task.checked === true ? task.checked = false : task.checked = true,
                 };
                 axios.put(`https://65c4b2f0dae2304e92e324ec.mockapi.io/todo/tasks/${task.id}`, checkedTask)
-                    .catch(error => console.error('Error:', error));
+                    .catch(error => console.error('Error in checking task:', error));
 
             },
         },
